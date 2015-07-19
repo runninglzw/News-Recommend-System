@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace News_Recommend.Control
 {
-    public class Request
+    public class MyRequest
     {
         /// <summary>
         /// 对新闻接口进行请求返回json数据（字符串）
@@ -48,7 +48,8 @@ namespace News_Recommend.Control
                 string title = jt["title"].ToString();//获得标题
                 string source = jt["source"].ToString();//获得新闻来源
                 string url = jt["article_url"].ToString();//获得新闻url
-                DateTime include_time = new DateTime(Convert.ToInt64(jt["behot_time"].ToString()));//获得新闻收录时间,将获得的毫秒数转化为datetime
+                Int64 time=Convert.ToInt64(jt["behot_time"].ToString());
+                DateTime include_time = ConvertLongDateTime(time);//获得新闻收录时间,将获得的毫秒数转化为datetime
                 int praise_count = Convert.ToInt32(jt["digg_count"].ToString());//获得新闻被赞次数
                 int step_count = Convert.ToInt32(jt["bury_count"].ToString()); //新闻踩的次数
                 int collect_count = Convert.ToInt32(jt["repin_count"].ToString());//新闻收藏的次数
@@ -56,6 +57,20 @@ namespace News_Recommend.Control
                 newslist.Add(news);
             }
             return newslist;
+        }
+        /// <summary>
+        /// 将Long类型转换为DateTime类型
+        /// </summary>
+        /// <param name="d">long</param>
+        /// <returns></returns>
+        public static DateTime ConvertLongDateTime(Int64 d)
+        {
+           
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            //Int64 lTime = Int64.Parse(d);
+            TimeSpan toNow = new TimeSpan(d);
+            DateTime dtResult = dtStart.Add(toNow);
+            return dtResult;
         }
     }
 }
