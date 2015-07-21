@@ -14,17 +14,39 @@ using Newtonsoft.Json.Linq;
 namespace News_Recommend.Control
 {
     public class MyRequest
-    {
+    {  
         /// <summary>
-        /// 对新闻检索接口进行请求返回json数据（字符串）,主要根据新闻关键字进行查询
+        /// 对新闻检索接口进行请求返回json数据（字符串）
         /// </summary>
         /// <param name="url"></param>新闻检索接口的url
-        /// q 为新闻的关键字
+        /// <param name="channelid"></param>频道id
+        /// <param name="channelname"></param>频道的名字
+        /// <param name="title"></param>标题，可以模糊搜索
+        /// <param name="page"></param>页数。默认为1，每页最多20条
         /// <returns></returns>
-        public static string createurl_news(string url,string q)
+        public static string createurl_news(string channelid,string channelname,string title,string page)
         {
+            string url = ConfigurationManager.ConnectionStrings["newsurl"].ConnectionString;//从Web.config中获得newsurl
+            string appid = ConfigurationManager.ConnectionStrings["appid"].ConnectionString;
             string key = ConfigurationManager.ConnectionStrings["mykey"].ConnectionString;//从Web.config中获得key
-            string myurl = url + "?key=" + key+ "&q="+q;
+            string time = GetTime();
+            string myurl = url + "?showapi_appid=" + appid + "&showapi_sign=" + key + "&showapi_timestamp=" + time;
+            if (channelid != null)
+            {
+                myurl = myurl + "&channelId=" + channelid;
+            }
+            if (channelname != null)
+            {
+                myurl = myurl + "&channelName=" + channelname;
+            }
+            if (title != null)
+            {
+                myurl = myurl + "&title=" + title;
+            }
+            if (page != null)
+            {
+                myurl = myurl + "&page=" + page;
+            }
             WebRequest request = WebRequest.Create(myurl);
             IAsyncResult result = request.BeginGetResponse(null, request);
             WebResponse response = request.EndGetResponse(result);
@@ -34,14 +56,17 @@ namespace News_Recommend.Control
             return res;
         }
         /// <summary>
-        /// 对新闻热点接口进行请求返回json数据（字符串），返回的是新闻的几个热点关键词
+        /// 对新闻类型接口进行请求返回json数据（字符串），返回的是包含新闻的频道id和名字等信息
         /// </summary>
         /// <param name="url"></param>新闻热点接口的url
         /// <returns></returns>
-        public static string createurl_keys(string url)
+        public static string createurl_keys()
         {
+            string appid = ConfigurationManager.ConnectionStrings["appid"].ConnectionString;
             string key = ConfigurationManager.ConnectionStrings["mykey"].ConnectionString;//从Web.config中获得key
-            string myurl = url + "?key=" + key;
+            string time = GetTime();
+            string url = ConfigurationManager.ConnectionStrings["keysurl"].ConnectionString;
+            string myurl = url + "?showapi_appid=" + appid + "&showapi_sign=" + key + "&showapi_timestamp=" + time;
             WebRequest request = WebRequest.Create(myurl);
             IAsyncResult result = request.BeginGetResponse(null, request);
             WebResponse response = request.EndGetResponse(result);
@@ -60,16 +85,17 @@ namespace News_Recommend.Control
             List<News> newslist=new List<News>();
             
             JObject jo = (JObject)JsonConvert.DeserializeObject(data);//将字符串转化为JObject
-            JArray ja = (JArray)jo["result"];//索引到result
+            JArray ja = (JArray)(jo["showapi_res_body"]["pagebean"]["contentlist"]);//索引到新闻集合
             foreach (JToken jt in ja)
             {
-                string source = jt["src"].ToString();//获得新闻来源
-                string content = jt["content"].ToString();//获得新闻content
+                string source = jt["source"].ToString();//获得新闻来源
+                string content = jt["desc"].ToString();//获得新闻content
                 string title = jt["title"].ToString();//获得标题                
-                string url = jt["url"].ToString();//获得新闻url              
-                string pdate = jt["pdate"].ToString();//获得新闻发布时间
-                string pdate_src = jt["pdate_src"].ToString();//获得新闻完整发布时间
-                News news = new News(source, content, title, url, pdate, pdate_src);
+                string url = jt["link"].ToString();//获得新闻url              
+                string pdate = jt["pubDate"].ToString();//获得新闻发布时间
+                string channelid = jt["channelId"].ToString();//获得新闻频道id
+                string channelName = jt["channelName"].ToString();//获得新闻频道名
+                News news = new News(source, content, title, url, pdate, channelid,channelName);
                 newslist.Add(news);
             }
             return newslist;
@@ -78,26 +104,20 @@ namespace News_Recommend.Control
         {
             List<string> keyslist = new List<string>();
             JObject jo = (JObject)JsonConvert.DeserializeObject(data);//将字符串转化为JObject
-            JArray ja = (JArray)jo["result"];//索引到result
+            JArray ja = (JArray)jo["showapi_res_body"]["channelList"];
             foreach (JToken jt in ja)
             {
-                string temp = jt.ToString();
+                string temp = jt["name"].ToString();//获得频道的名称
                 keyslist.Add(temp);
             }
             return keyslist;
         }
-        /// <summary>
-        /// 将Long类型转换为DateTime类型
-        /// </summary>
-        /// <param name="d">long</param>
-        /// <returns></returns>
-        //public static DateTime ConvertLongDateTime(Int64 d)
-        //{           
-        //    DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-        //    //Int64 lTime = Int64.Parse(d);
-        //    TimeSpan toNow = new TimeSpan(d);
-        //    DateTime dtResult = dtStart.Add(toNow);
-        //    return dtResult;
-        //}
+        //按指定格式获得当前系统时间
+        public static string GetTime()
+        {
+
+            DateTime dt = DateTime.Now;
+            return dt.ToString("yyyyMMddHHmmss");
+        }
     }
 }

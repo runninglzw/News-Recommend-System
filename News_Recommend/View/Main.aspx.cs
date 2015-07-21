@@ -14,19 +14,20 @@ namespace News_Recommend.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string newsurl = ConfigurationManager.ConnectionStrings["newsurl"].ConnectionString;//从Web.config中获得newsurl
-            //string res = MyRequest.createurl_news(newsurl, "子洲暴雨");
-            //List<News> mynews = new List<News>();
-            //mynews = MyRequest.analysis_news(res);
-            //ListBox1.DataSource = mynews;
-            //ListBox1.DataBind();
+            
+            string res = MyRequest.createurl_news(null, null, "北京", null);
 
-            string keysurl = ConfigurationManager.ConnectionStrings["keysurl"].ConnectionString;//从Web.config中获得keysurl
-            string res = MyRequest.createurl_keys(keysurl);
-            List<string> mynews = new List<string>();
-            mynews = MyRequest.analysis_keys(res);
+            List<News> mynews = new List<News>();
+            mynews = MyRequest.analysis_news(res);
             ListBox1.DataSource = mynews;
             ListBox1.DataBind();
+
+            //string res = MyRequest.createurl_keys();
+            //List<string> mynews = new List<string>();
+            //mynews = MyRequest.analysis_keys(res);
+            //ListBox1.DataSource = mynews;
+            //ListBox1.DataBind();
         }
+
     }
 }
