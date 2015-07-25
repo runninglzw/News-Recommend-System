@@ -60,12 +60,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\content.css" />
+    <Content Include="css\foot.css" />
+    <Content Include="css\head.css" />
+    <Content Include="css\main.css" />
     <Content Include="View\Main.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\Recommend.cs" />
     <Compile Include="Control\Request.cs" />
     <Compile Include="Control\sqlHelper.cs" />
     <Compile Include="Model\News.cs" />

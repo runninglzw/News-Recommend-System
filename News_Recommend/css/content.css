@@ -1,0 +1,104 @@
+#content{
+
+    min-height:580px;
+    margin: 0 auto;
+    width: 980px;
+    height: auto;
+    font: 16px "Microsoft YaHei","微软雅黑","SimSun","宋体","Arial Narrow",HELVETICA;
+}
+#content-1{
+    margin-top: 20px;
+    min-height:580px;
+    background-color: #ffffff;
+}
+
+#sectionL{
+    width: 665px;
+    min-height:580px;
+    float: left;
+    margin: 20px;
+}
+#sectionL header{
+    color:#43B49E;
+    border-bottom: 1px solid #CCCCCC;
+}
+#asideR{
+
+    float: right;
+    min-height:580px;
+    width: 260px;
+    border-left: 1px solid #E6E6E6;
+}
+
+
+input, button, textarea, select {
+    resize: none;
+}
+input, button, textarea, select, optgroup, option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+
+#nav ul li {
+
+    position: relative;
+}
+#nav ul li a {
+    color: #fff;
+    display:block;
+}
+#nav ul li ul {
+    display: none;
+    z-index: 9;
+}
+#nav ul li ul li{
+    display: block;
+}
+#nav ul li:hover ul {
+    display: block;
+    position: absolute;
+}
+#nav ul li:hover ul li a {
+    margin-left: -10px;
+    display:block;
+    background: #2EAFCF;
+    color:#ffffff;
+  width: 80px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: none;
+    font-size: 14px;
+}
+#nav ul li:hover ul li a:hover {
+    background: #2bebff;
+    color:#fff;
+}
+
+ .search{
+            float: right;
+        }
+        #content-1 li{
+            margin-top: 5px;
+            display: block;
+        }
+        #content-1 li span{
+
+        	margin-left:400px;
+        }
+        .divline{
+        	width:255px;
+        	height:1px;
+        	background-color:#ccc;
+        	margin-top:-6px;
+        }
+       #asideR li span{
+        	margin-left:20px;
+        }
+       #asideR h5{
+        	padding: 15px;
+        }

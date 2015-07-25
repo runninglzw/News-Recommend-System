@@ -8,12 +8,12 @@ using System.Data.Sql;
 using System.Data;
 
 
-namespace WebApplication1.App_Code
+namespace News_Recommend.Control
 {
     public class sqlHelper
     {
         //获取数据库连接字符串，属于静态变量并且只读，项目中的文档可以直接使用，但不能修改
-        public static readonly string connectionstring = ConfigurationManager.ConnectionStrings["PhotoConnectionString"].ConnectionString;
+        public static readonly string connectionstring = ConfigurationManager.ConnectionStrings["NewsConnectionString"].ConnectionString;
         /// <summary>
         /// 执行一个不需要返回值的sqlcommand命令
         /// </summary>
