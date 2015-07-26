@@ -42,7 +42,7 @@ namespace News_Recommend.Control
                 SqlParameter[] param = new SqlParameter[]
                 {
                 new SqlParameter("@userid",userid),
-                new SqlParameter("@newstype",type)
+                new SqlParameter("@type",type)
                 };
                 int count = (int)sqlHelper.ExecuteScalar(sqlHelper.connectionstring, CommandType.Text, sql, param);
                 if (!types.ContainsKey(type))

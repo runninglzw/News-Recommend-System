@@ -17,8 +17,8 @@ namespace News_Recommend.View
         private List<News> mynews;
         protected void Page_Load(object sender, EventArgs e)
         {
-            mynews = Getall();
-            Record_log("游戏");
+            mynews = Getlike();
+            //Record_log("游戏");
             //string res = MyRequest.createurl_news(null, null, "北京", null);
 
             //List<News> mynews = new List<News>();
@@ -64,6 +64,21 @@ namespace News_Recommend.View
             }
 
         }
+        /// <summary>
+        /// 以推荐类获得的用户喜欢的类型为参数，调用Myrequest获得该类型的新闻
+        /// </summary>
+        /// <returns></returns>
+        public List<News> Getlike()
+        {
+            Recommend re=new Recommend();
+            re.getusertype();
+            string usertype = re.getfirsttype();//获得用户喜欢的新闻类型
+            List<News> mylike = new List<News>();
+            string result = MyRequest.createurl_news(null, usertype, null, null);
+            mylike = MyRequest.analysis_news(result);
+            return mylike;
+        }
+
     }
 
 }
