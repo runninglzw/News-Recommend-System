@@ -102,3 +102,11 @@ input, button, textarea, select, optgroup, option {
        #asideR h5{
         	padding: 15px;
         }
+#sectionL ul
+{
+    width:100%;
+}
+#sectionL span
+{
+    float:right;
+}

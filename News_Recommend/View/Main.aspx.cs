@@ -14,27 +14,23 @@ namespace News_Recommend.View
 {
     public partial class Main : System.Web.UI.Page
     {
-        private List<News> mynews;
+        public  List<News> mynews;
+        public List<News> commendnews;
+        public int star;//获取显示的页数
         protected void Page_Load(object sender, EventArgs e)
         {
-            mynews = Getlike();
-            //Record_log("游戏");
-            //string res = MyRequest.createurl_news(null, null, "北京", null);
+            star = Convert.ToInt32(Request["star"]==null?"1":Request["star"]);
+            if (star < 1)
+            {
+                star = 1;
+            }
+            mynews=Getall(star);
+            commendnews = Getlike();
 
-            //List<News> mynews = new List<News>();
-            //mynews = MyRequest.analysis_news(res);
-            //ListBox1.DataSource = mynews;
-            //ListBox1.DataBind();
-
-            ////string res = MyRequest.createurl_keys();
-            ////List<string> mynews = new List<string>();
-            ////mynews = MyRequest.analysis_keys(res);
-            ////ListBox1.DataSource = mynews;
-            ////ListBox1.DataBind();
         }
-        public List<News> Getall()
+        public List<News> Getall(int star)
         {
-            string res = MyRequest.createurl_news(null, null, null, null);
+            string res = MyRequest.createurl_news(null, null, null, star.ToString());
             List<News> mynews = new List<News>();
             mynews = MyRequest.analysis_news(res);
             return mynews;
