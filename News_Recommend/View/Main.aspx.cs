@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using News_Recommend.Control;
 using News_Recommend.Model;
+using System.Web.Services; 
 
 namespace News_Recommend.View
 {
@@ -24,8 +25,19 @@ namespace News_Recommend.View
             {
                 star = 1;
             }
+            if (star == 1)
+            {
+                beforpage.Visible = false;
+            }
             mynews=Getall(star);
             commendnews = Getlike();
+            //判断下一页是否可用
+            List<News> nextnews = new List<News>();
+            nextnews = Getall(star + 1);
+            if (nextnews.Count < 1)
+            {
+                nextpage.Visible = false;//设置下一页不可用
+            }
 
         }
         public List<News> Getall(int star)
@@ -39,7 +51,8 @@ namespace News_Recommend.View
         /// 记录用户的行为：将用户id，新闻类型，点击时间记录到数据库的logdata表
         /// </summary>
         /// <param name="type"></param>新闻得类型
-        public void Record_log(string type)
+        [WebMethod]
+        public static void Record_log(string type)
         {
             try
             {
@@ -73,6 +86,11 @@ namespace News_Recommend.View
             string result = MyRequest.createurl_news(null, usertype, null, null);
             mylike = MyRequest.analysis_news(result);
             return mylike;
+        }
+        protected void Search()
+        {
+
+            //Response.Redirect("Search.aspx");
         }
 
     }
