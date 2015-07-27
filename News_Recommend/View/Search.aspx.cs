@@ -13,7 +13,7 @@ namespace News_Recommend.View
     {
         public List<News> KeywordNews;
         public int star;//获取显示的页数
-        public string keyword;
+        public static string keyword;
         protected void Page_Load(object sender, EventArgs e)
         {
             star = Convert.ToInt32(Request["star"]==null?"1":Request["star"]);

@@ -9,35 +9,48 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using News_Recommend.Control;
 using News_Recommend.Model;
-using System.Web.Services; 
+using System.Web.Services;
 
 namespace News_Recommend.View
 {
     public partial class Main : System.Web.UI.Page
     {
-        public  List<News> mynews;
+        public List<News> mynews;
         public List<News> commendnews;
         public int star;//获取显示的页数
+        public int count;//获取推荐新闻的条数
         protected void Page_Load(object sender, EventArgs e)
         {
-            star = Convert.ToInt32(Request["star"]==null?"1":Request["star"]);
+
+            star = Convert.ToInt32(Request.QueryString["star"] == null ? "1" : Request.QueryString["star"]);
+            count = Convert.ToInt32(Request.QueryString["count"] == null ? "5" : Request.QueryString["count"]);
             if (star < 1)
             {
                 star = 1;
             }
-            if (star == 1)
+            if (count < 5)
             {
-                beforpage.Visible = false;
+                count = 5;
             }
-            mynews=Getall(star);
+            //if (star == 1)
+            //{
+            //    //beforpage.Visible = false;
+            //}
+            mynews = Getall(star);
             commendnews = Getlike();
-            //判断下一页是否可用
-            List<News> nextnews = new List<News>();
-            nextnews = Getall(star + 1);
-            if (nextnews.Count < 1)
-            {
-                nextpage.Visible = false;//设置下一页不可用
-            }
+            //如果count大于所有新闻的个数则count赋值为最大
+            count = (count > commendnews.Count) ? commendnews.Count : count;
+
+
+
+            ////判断下一页是否可用
+            //List<News> nextnews = new List<News>();
+            //nextnews = Getall(star + 1);
+            //if (nextnews.Count < 1)
+            //{
+            //    //nextpage.Visible = false;//设置下一页不可用
+            //}
+
 
         }
         public List<News> Getall(int star)
@@ -79,7 +92,7 @@ namespace News_Recommend.View
         /// <returns></returns>
         public List<News> Getlike()
         {
-            Recommend re=new Recommend();
+            Recommend re = new Recommend();
             re.getusertype();
             string usertype = re.getfirsttype();//获得用户喜欢的新闻类型
             List<News> mylike = new List<News>();
