@@ -64,10 +64,12 @@
     <Content Include="css\foot.css" />
     <Content Include="css\head.css" />
     <Content Include="css\main.css" />
+    <Content Include="View\changeps.aspx" />
     <Content Include="View\Login.aspx" />
     <Content Include="View\Main.aspx" />
     <Content Include="View\Register.aspx" />
     <Content Include="View\Search.aspx" />
+    <Content Include="View\zhuce.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -79,6 +81,13 @@
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\changeps.aspx.cs">
+      <DependentUpon>changeps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\changeps.aspx.designer.cs">
+      <DependentUpon>changeps.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -106,6 +115,13 @@
     </Compile>
     <Compile Include="View\Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\zhuce.aspx.cs">
+      <DependentUpon>zhuce.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\zhuce.aspx.designer.cs">
+      <DependentUpon>zhuce.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

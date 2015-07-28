@@ -10,6 +10,6 @@
 namespace News_Recommend.View {
     
     
-    public partial class Login {
+    public partial class zhuce {
     }
 }

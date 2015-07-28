@@ -47,6 +47,15 @@
         .fanye a{        	
         	color: #2EAFCF;
         }
+         .fanyeR{
+             width:300px;
+        	padding: 10px;
+        	text-align: center;
+        	color: #2EAFCF;
+        }
+        .fanyeR a{        	
+        	color: #2EAFCF;
+        }
     </style>
 </head>
 <script>
@@ -71,7 +80,7 @@
 
                 <li class="search">
                     <input id="search" type="text" style="width: 100px"><input  type="button" value="搜索"  onclick=search()></li>
-                <a style="margin-left: 700px">修改密码</a>
+                <a style="margin-left: 700px" href="changeps.aspx">修改密码</a>
             </ul>
         </nav>
     </header>
@@ -109,7 +118,7 @@
                     </li>                   
                     <% } %>
                     <br />
-                    <div class="fanye"><a  id="A1"  href="Main.aspx?star=<%=star %>&count=<%=(count+5) %>">下一页</a>
+                    <div class="fanyeR"><a  id="A1"  href="Main.aspx?star=<%=star %>&count=<%=(count+5) %>">下一页</a>
    <a id="A2"  href="Main.aspx?star=<%=star %>&count=<%=(count-5) %>">上一页</a>
     </div>
                 </ul>

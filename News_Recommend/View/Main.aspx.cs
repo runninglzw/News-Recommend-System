@@ -100,11 +100,6 @@ namespace News_Recommend.View
             mylike = MyRequest.analysis_news(result);
             return mylike;
         }
-        protected void Search()
-        {
-
-            //Response.Redirect("Search.aspx");
-        }
 
     }
 
