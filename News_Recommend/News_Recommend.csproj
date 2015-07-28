@@ -64,6 +64,7 @@
     <Content Include="css\foot.css" />
     <Content Include="css\head.css" />
     <Content Include="css\main.css" />
+    <Content Include="img\icon_input.png" />
     <Content Include="View\changeps.aspx" />
     <Content Include="View\Login.aspx" />
     <Content Include="View\Main.aspx" />

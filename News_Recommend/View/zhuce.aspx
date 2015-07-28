@@ -130,7 +130,7 @@
     </style>
 <body>
 <span class="quick">
-   <a href="index.html">
+   <a href="Login.aspx" style="float:right;position:relative;background-color:#0094ff;padding:5px;border-radius:2px">
        返回登录
    </a>
 

@@ -53,10 +53,9 @@
 </head>
 <body>
 <span class="quick">
-   <a href="index.html">
-       返回登录
+   <a style="float:right;position:relative;background-color:#0094ff;padding:5px;border-radius:2px" href="Main.aspx">
+       返回新闻列表哦
    </a>
-
     </span>
 <header id="header">
     <h1>新闻</h1>
@@ -68,28 +67,31 @@
 </header>
 <div id="content"><br/><br/><br/><br/><br/>
     <div id="groupLogin">
-        <form id="zhuce" action="?Action=ok" method="post">
-            <h4 class="zhuce">修改密码</h4>
-            <ul class="zhuceList">
+        <form style="border:1px #808080 solid;margin:20px auto;padding-top:50px;padding-bottom:50px;text-align:center;width:500px" id="changePass" action="?Action=ok" method="post">
+            <h4 class="zhuce"style="text-align:center">修改密码</h4>
+            <ul class="zhuceList" style="text-align:center;width:500px;margin-top:20px;">
                 <li class="zhuceList-li">原密码：</li>
                 <li>
                     <input id="pass1" name="pass"  class="zhuceList-li-input" type="password" value="" placeholder="请输入原密码" onblur=checkPass()>
                 </li>
                 <span id="pWarnning" style="display:none;"></span>
+                
             </ul>
-            <ul class="zhuceList">
+            <ul class="zhuceList" style="text-align:center;width:500px;margin-top:20px;">
                 <li class="zhuceList-li">新密码：</li>
                 <li>
                     <input id="pass2" name="pass1"  class="zhuceList-li-input" type="password" value="" placeholder="请输入新密码" onblur=checkPass1()>
                 </li>
                 <span id="pWarnning1" style="display:none;"></span>
             </ul>
-            <ul class="zhuceList">
+            <ul class="zhuceList" style="text-align:center;width:500px;margin-top:20px;">
                 <li class="zhuceList-li">新密码：</li>
                 <li>
                     <input id="pass3" name="pass2"  class="zhuceList-li-input" type="password" value="" placeholder="请再次输入新密码" onblur=checkPass2()>
                 </li>
+                <br />
                 <span id="pWarnning2" style="display:none;"></span>
+                <br />
             </ul>
             <input name="zhuce" class="input_zhuce" type="submit" value="确定" >
         </form>

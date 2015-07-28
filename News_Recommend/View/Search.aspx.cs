@@ -22,19 +22,19 @@ namespace News_Recommend.View
                 star = 1;
             }
             //页面为第一页则禁用上一页的功能
-            if (star == 1)
-            {
-                beforpage.Visible = false;
-            }
+            //if (star == 1)
+            //{
+            //    beforpage.Visible = false;
+            //}
             keyword = Request["type"];
             KeywordNews = Getall(keyword, star);
             //判断下一页是否可用
-            List<News> nextnews = new List<News>();
-            nextnews = Getall(keyword, star+1);
-            if (nextnews.Count < 1)
-            {
-                nextpage.Visible = false;//设置下一页不可用
-            }
+            //List<News> nextnews = new List<News>();
+            //nextnews = Getall(keyword, star+1);
+            //if (nextnews.Count < 1)
+            //{
+            //    nextpage.Visible = false;//设置下一页不可用
+            //}
         }
         /// <summary>
         /// 按关键字和页数获得新闻

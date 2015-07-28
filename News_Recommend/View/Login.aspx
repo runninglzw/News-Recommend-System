@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="../css/foot.css" type="text/css">
     <style type="text/css">
     #login{
-      margin-top: 100px;
+        margin-top: 100px;
     	border: 1px solid #ccc;
+        width:400px;
+        margin-left:300px;
     }
     .input_login {
   border: #CCCCCC;
@@ -35,16 +37,21 @@
   font-size: 14px;
   vertical-align: middle;
 }
-.logoPass {
-  background-position: 0px 0px;
-}
-.logoPass, .logo {
+.logo {
   margin-left: 15px;
   width: 16px;
   height: 16px;
   display: inline-block;
   vertical-align: middle;
   background: url("../img/icon_input.png") no-repeat scroll -16px 0px transparent;
+}
+.logoPass {
+  margin-left: 15px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url("../img/icon_input.png") no-repeat scroll 0px 0px transparent;
 }
 .user {
   margin: 20px auto;
@@ -98,7 +105,8 @@
 </header>
 <div id="content">
 	 <form id="login" action="?Action=Login" method="post">
-            <h4 class="login">用户登录</h4>
+    
+            <h4 style="margin-top:30px;text-align:center"class="login">用户登录</h4>
             <ul class="user">
                 <li class="logo"></li>
                 <li>
@@ -114,8 +122,10 @@
                 </li>
                 <span id="pWarnning1" style="display:none;"></span>
             </ul>
+            <div style="margin-left:75px">
            <input type="submit" class="input_login"  value="登录">
            <input type="button" class="input_login"  value="注册" onclick=zhuce()>
+           </div>
            </br></br>
            </form>
         </form>

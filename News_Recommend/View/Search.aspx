@@ -85,7 +85,7 @@
                     <% } %>
                    
     </ul>
-<div class="fanye"><a id="beforpage" runat="server" href="Search.aspx?star=<%=(star-1) %>&type=<%=keyword %>">上一页</a>&nbsp;&nbsp;&nbsp;<a id="nextpage" runat="server" href="Search.aspx?star=<%=(star+1) %>&type=<%=keyword %>">下一页</a></div>
+<div class="fanye"><a id="beforpage" href="Search.aspx?star=<%=(star-1) %>&type=<%=keyword %>">上一页</a>&nbsp;&nbsp;&nbsp;<a id="nextpage" href="Search.aspx?star=<%=(star+1) %>&type=<%=keyword %>">下一页</a></div>
 <div id="back" class="back">返回</div>
 </div>
 </div>

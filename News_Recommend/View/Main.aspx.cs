@@ -23,14 +23,14 @@ namespace News_Recommend.View
         {
 
             star = Convert.ToInt32(Request.QueryString["star"] == null ? "1" : Request.QueryString["star"]);
-            count = Convert.ToInt32(Request.QueryString["count"] == null ? "5" : Request.QueryString["count"]);
+            count = Convert.ToInt32(Request.QueryString["count"] == null ? "10" : Request.QueryString["count"]);
             if (star < 1)
             {
                 star = 1;
             }
-            if (count < 5)
+            if (count < 10)
             {
-                count = 5;
+                count = 10;
             }
             //if (star == 1)
             //{

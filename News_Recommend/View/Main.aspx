@@ -63,7 +63,6 @@
         var o = document.getElementById("search");
         
         var text = o.value;
-        alert(text);
         window.location.href = "Search.aspx?type="+text;
     }
 
@@ -107,7 +106,7 @@
                 <h5>最新推荐</h5>
                 <div class="divline"></div>
                 <ul>
-                <%int i = count - 5; %>
+                <%int i = count - 10; %>
                     <%for (; i < count;i++ ){%>
                     <li>
                     <a herf="" class="titleR"><%=commendnews[i].Gettitle()%></a>
@@ -118,8 +117,8 @@
                     </li>                   
                     <% } %>
                     <br />
-                    <div class="fanyeR"><a  id="A1"  href="Main.aspx?star=<%=star %>&count=<%=(count+5) %>">下一页</a>
-   <a id="A2"  href="Main.aspx?star=<%=star %>&count=<%=(count-5) %>">上一页</a>
+                    <div class="fanyeR"><a  id="A1"  href="Main.aspx?star=<%=star %>&count=<%=(count+10) %>">下一页</a>
+   <a id="A2"  href="Main.aspx?star=<%=star %>&count=<%=(count-10) %>">上一页</a>
     </div>
                 </ul>
 
