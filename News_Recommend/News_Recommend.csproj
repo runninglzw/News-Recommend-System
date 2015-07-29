@@ -68,7 +68,6 @@
     <Content Include="View\changeps.aspx" />
     <Content Include="View\Login.aspx" />
     <Content Include="View\Main.aspx" />
-    <Content Include="View\Register.aspx" />
     <Content Include="View\Search.aspx" />
     <Content Include="View\zhuce.aspx" />
     <Content Include="Web.config">
@@ -102,13 +101,6 @@
     </Compile>
     <Compile Include="View\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

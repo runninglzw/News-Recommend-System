@@ -23,9 +23,9 @@ namespace News_Recommend.Control
             return secondtype;
         }
         /// <summary>
-        /// 获得出现最多次数的类型
+        /// 从logdata中获得出现最多次数的类型
         /// </summary>
-        public void getusertype()
+        public void getusertype(string userid)
         {
             //一个类型的集合，包含用户点击的次数
             Dictionary<string, int> types = new Dictionary<string, int>();
@@ -33,7 +33,6 @@ namespace News_Recommend.Control
             string res = MyRequest.createurl_keys();
             List<string> mynews = new List<string>();
             mynews = MyRequest.analysis_keys(res);
-            string userid = "1";
             //将类型集合添加到types中，并且将出现次数初始化为0
             foreach (string type in mynews)
             {
@@ -61,6 +60,10 @@ namespace News_Recommend.Control
                 }
             }
 
+        }
+        public void GetUserSecondtype()
+        {
+            //string sql = "select ";
         }
 
     }

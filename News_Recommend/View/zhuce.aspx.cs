@@ -22,7 +22,9 @@ namespace News_Recommend.View
                 string userid=Request.Form["id"];
                 string userpass1=Request.Form["pass1"];
                 string userpass2=Request.Form["pass2"];
-                string type=Request.Form["like"];
+                string str = Request.Form.Get("like");//"id,value"的形式
+                string[] typechar=str.Split(',');
+                string type = typechar[1];
                 //判断id是否存在
                 if (!IsExist(userid))
                 {

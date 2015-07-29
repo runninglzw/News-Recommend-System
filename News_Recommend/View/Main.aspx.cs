@@ -21,7 +21,11 @@ namespace News_Recommend.View
         public int count;//获取推荐新闻的条数
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //判断Session是否为空，为空则跳转登陆界面
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
             star = Convert.ToInt32(Request.QueryString["star"] == null ? "1" : Request.QueryString["star"]);
             count = Convert.ToInt32(Request.QueryString["count"] == null ? "10" : Request.QueryString["count"]);
             if (star < 1)
@@ -37,7 +41,7 @@ namespace News_Recommend.View
             //    //beforpage.Visible = false;
             //}
             mynews = Getall(star);
-            commendnews = Getlike();
+            commendnews = Getlike(Session["userid"].ToString());
             //如果count大于所有新闻的个数则count赋值为最大
             count = (count > commendnews.Count) ? commendnews.Count : count;
 
@@ -90,17 +94,16 @@ namespace News_Recommend.View
         /// 以推荐类获得的用户喜欢的类型为参数，调用Myrequest获得该类型的新闻
         /// </summary>
         /// <returns></returns>
-        public List<News> Getlike()
+        public List<News> Getlike(string id)
         {
             Recommend re = new Recommend();
-            re.getusertype();
+            re.getusertype(id);
             string usertype = re.getfirsttype();//获得用户喜欢的新闻类型
             List<News> mylike = new List<News>();
             string result = MyRequest.createurl_news(null, usertype, null, null);
             mylike = MyRequest.analysis_news(result);
             return mylike;
         }
-
     }
 
 }

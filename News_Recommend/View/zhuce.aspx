@@ -171,10 +171,10 @@
             </ul>
             <ul class="zhuceList">
             <select id="like" name="like"  >
-           <option value="">----请选择您喜欢的新闻类型----</option>
-           <%int i = 0; %>
+           <option value="0">----请选择您喜欢的新闻类型----</option>
+           <%int i = 1; %>
            <%foreach(string str in types) {%>
-            <option value=<%=i %>><%=str %></option>
+            <option value="<%=i++ %>,<%=str %>"><%=str %></option>
            <%} %>
            </select>
             </ul>
