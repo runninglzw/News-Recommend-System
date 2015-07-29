@@ -32,6 +32,10 @@ namespace News_Recommend.View
             {
                 star = 1;
             }
+            if (Getall(star) == null)
+            {
+                --star;
+            }
             if (count < 10)
             {
                 count = 10;
@@ -97,11 +101,30 @@ namespace News_Recommend.View
         public List<News> Getlike(string id)
         {
             Recommend re = new Recommend();
-            re.getusertype(id);
-            string usertype = re.getfirsttype();//获得用户喜欢的新闻类型
+            re.getusertype(id);//获得用户喜欢的新闻类型（从logdata表获得）
+            re.GetUserSecondtype(id);//获得用户喜欢的类型（可能为多个，从users表获得）
+            string usertype = re.getfirsttype();
             List<News> mylike = new List<News>();
             string result = MyRequest.createurl_news(null, usertype, null, null);
             mylike = MyRequest.analysis_news(result);
+            //判断类型是否大一1个
+            if (re.getsecondtype().Contains(","))
+            {
+                //将每一个类型的新闻都添加到mylike中
+                string[] usertypes = re.getsecondtype().Split(',');
+                //将获得的类型都添加到mylike中
+                foreach (string type in usertypes)
+                {
+                    string res = MyRequest.createurl_news(null, type, null, null);
+                    mylike.AddRange(MyRequest.analysis_news(res));
+                }
+            }
+            else
+            {
+                string usertype2 = re.getsecondtype();
+                string res = MyRequest.createurl_news(null, usertype2, null, null);
+                mylike.AddRange(MyRequest.analysis_news(res));
+            }
             return mylike;
         }
     }

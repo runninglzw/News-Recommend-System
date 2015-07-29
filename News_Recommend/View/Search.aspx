@@ -71,10 +71,11 @@
         </ul>
     </nav>
 </header>
+
 <div id="content">
     <div id="content-1">
     <ul id="new">
-   
+   <%if(!string.IsNullOrEmpty(keyword)) {%>
                         <%foreach (var item in KeywordNews) {%>
                          <li id="">
                     <a class="title" href="<%=item.Geturl() %>"><%=item.Gettitle()%></a>
@@ -83,9 +84,11 @@
             <!--<span style="display: none;"><%=item.Getchannelname() %></span>-->
              </li>
                     <% } %>
-                   
+   <%} %> 
+
     </ul>
 <div class="fanye"><a id="beforpage" href="Search.aspx?star=<%=(star-1) %>&type=<%=keyword %>">上一页</a>&nbsp;&nbsp;&nbsp;<a id="nextpage" href="Search.aspx?star=<%=(star+1) %>&type=<%=keyword %>">下一页</a></div>
+  
 <div id="back" class="back">返回</div>
 </div>
 </div>

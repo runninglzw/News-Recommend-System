@@ -63,7 +63,7 @@
         var o = document.getElementById("search");
         
         var text = o.value;
-        window.location.href = "Search.aspx?type="+text;
+        window.location.href = "Search.aspx?type="+text+"&first=first";
     }
 
 

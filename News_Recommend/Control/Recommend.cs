@@ -12,8 +12,9 @@ namespace News_Recommend.Control
     /// </summary>
     public class Recommend
     {
-        private string firsttype;
-        private string secondtype;
+        private string firsttype;//只有一个新闻喜欢类型
+        private string secondtype;//可能为一到多个新闻喜欢类型
+        private string keyword;//用户搜索次数最多的关键字
         public string getfirsttype()
         {
             return firsttype;
@@ -25,6 +26,7 @@ namespace News_Recommend.Control
         /// <summary>
         /// 从logdata中获得出现最多次数的类型
         /// </summary>
+        /// <param name="userid"></param>用户的id
         public void getusertype(string userid)
         {
             //一个类型的集合，包含用户点击的次数
@@ -61,9 +63,26 @@ namespace News_Recommend.Control
             }
 
         }
-        public void GetUserSecondtype()
+        /// <summary>
+        /// 获得用户注册时选择的新闻类型（在users表中存储）
+        /// </summary>
+        /// <param name="id"></param>用户id
+        public void GetUserSecondtype(string id)
         {
-            //string sql = "select ";
+            string sql = "select newstype from users where userid=@userid";
+            SqlParameter[] param = new SqlParameter[]
+                {
+                new SqlParameter("@userid",id)
+                };
+            secondtype = (string)sqlHelper.ExecuteScalar(sqlHelper.connectionstring, CommandType.Text, sql, param);
+        }
+        /// <summary>
+        /// 获得用户搜索次数最多的关键字
+        /// </summary>
+        /// <param name="id"></param>用户id
+        public void GetKeyword(string id)
+        {
+ 
         }
 
     }
