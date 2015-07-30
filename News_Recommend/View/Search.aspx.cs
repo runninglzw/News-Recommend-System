@@ -30,6 +30,11 @@ namespace News_Recommend.View
             {
                 --star;
             }
+            //页面为第一页则禁用上一页的功能
+            //if (star == 1)
+            //{
+            //    beforpage.Visible = false;
+            //}
             
             KeywordNews = Getall(keyword, star);
             //如果关键字不为空并且第一次进入该页面而不是响应回发，将关键字记录到数据库中
@@ -39,6 +44,17 @@ namespace News_Recommend.View
                 Session["first"] = null;
             }
             
+
+
+
+
+            //判断下一页是否可用
+            //List<News> nextnews = new List<News>();
+            //nextnews = Getall(keyword, star+1);
+            //if (nextnews.Count < 1)
+            //{
+            //    nextpage.Visible = false;//设置下一页不可用
+            //}
         }
         /// <summary>
         /// 按关键字和页数获得新闻

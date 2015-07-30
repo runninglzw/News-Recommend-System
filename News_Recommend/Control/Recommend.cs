@@ -82,7 +82,7 @@ namespace News_Recommend.Control
         /// <param name="id"></param>用户id
         public void GetKeyword(string id)
         {
- 
+            string sql = "select keyword from userkeyword where userid=@id";
         }
 
     }
