@@ -19,6 +19,7 @@ namespace News_Recommend.View
         public List<News> commendnews;
         public int star;//获取显示的页数
         public int count;//获取推荐新闻的条数
+        public static string id;//用户id
         protected void Page_Load(object sender, EventArgs e)
         {
             //判断Session是否为空，为空则跳转登陆界面
@@ -26,6 +27,7 @@ namespace News_Recommend.View
             {
                 Response.Redirect("Login.aspx");
             }
+            id = Session["userid"].ToString();
             star = Convert.ToInt32(Request.QueryString["star"] == null ? "1" : Request.QueryString["star"]);
             count = Convert.ToInt32(Request.QueryString["count"] == null ? "10" : Request.QueryString["count"]);
             if (star < 1)
@@ -78,7 +80,7 @@ namespace News_Recommend.View
             try
             {
                 string sql = "insert into logdata values(@userid,@newstype,@time)";
-                string userid = "1";
+                string userid = id;
                 string time = DateTime.Now.ToString();
                 SqlParameter[] param = new SqlParameter[]
                 {

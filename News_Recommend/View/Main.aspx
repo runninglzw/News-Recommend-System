@@ -65,14 +65,21 @@
         var text = o.value;
         window.location.href = "Search.aspx?type="+text+"&first=first";
     }
-
+    function getType() {
+        var e = event || window.event;
+        var target = e.target || e.srcElement;
+        if (target.className == "title" || target.className == "source") {
+            var oLi = target.parentNode;
+            var oType = oLi.getElementsByTagName("span")[0].innerHTML;
+        }
+        PageMethods.Record_log(oType);
+    }
 
 
 </script>
 <body>
     <header id="header">
         <h1>新闻</h1>
-
         <nav id="nav">
             <ul>
                 <li><a href="Main.aspx">首页</a></li>
@@ -87,10 +94,12 @@
         <div id="content-1">
             <section id="sectionL">
                 <header>最新报道</header>
-                <ul id="new">
+                 <form id="form1" runat="server">  
+                <ul id="new"  onclick=getType();>
+                <%int x = 1 ; %>
                     <%foreach (var item in mynews) {%>
-                    <li id="">
-                    <a href="" class="title"><%=item.Gettitle()%></a>
+                    <li id="<%=x++ %>">
+                    <a href="<%=item.Geturl() %>" class="title" ><%=item.Gettitle()%></a>
                         <div class="date"><%=item.Getpdate()%></div>
             <a class="source" href="<%=item.Geturl() %>"><%=item.Getsource() %> </a>
             <span style="display: none;"><%=item.Getchannelname() %></span>
@@ -100,7 +109,10 @@
              <div class="fanye"><a id="nextpage"  href="Main.aspx?star=<%=(star+1) %>&count=<%=count %>">下一页</a>
    <a id="beforpage"  href="Main.aspx?star=<%=(star-1) %>&count=<%=count %>">上一页</a>
     </div>
+            <div style="display:none"><asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">  
+    </asp:ScriptManager>  </div>
     </ul> 
+    </form>
             </section>
             <aside id="asideR">
                 <h5>最新推荐</h5>
