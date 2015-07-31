@@ -100,14 +100,19 @@ namespace News_Recommend.View
         /// <returns></returns>
         public List<News> Getlike(string id)
         {
+            List<News> mylike = new List<News>();
             Recommend re = new Recommend();
             re.getusertype(id);//获得用户喜欢的新闻类型（从logdata表获得）
             re.GetUserSecondtype(id);//获得用户喜欢的类型（可能为多个，从users表获得）
+            re.GetKeyword(id);//获得用户经常搜索的关键字（从userkeyword表中获得）
             string usertype = re.getfirsttype();
-            List<News> mylike = new List<News>();
-            string result = MyRequest.createurl_news(null, usertype, null, null);
-            mylike = MyRequest.analysis_news(result);
-            //判断类型是否大一1个
+            //类型不为空才推荐
+            if (!string.IsNullOrEmpty(usertype))
+            {
+                string res = MyRequest.createurl_news(null, usertype, null, null);
+                mylike = MyRequest.analysis_news(res);
+            }
+            //判断类型是否大于1个，包含逗号就大于1个
             if (re.getsecondtype().Contains(","))
             {
                 //将每一个类型的新闻都添加到mylike中
@@ -122,7 +127,18 @@ namespace News_Recommend.View
             else
             {
                 string usertype2 = re.getsecondtype();
-                string res = MyRequest.createurl_news(null, usertype2, null, null);
+                //类型不为空才推荐
+                if (!string.IsNullOrEmpty(usertype2))
+                {
+                    string res = MyRequest.createurl_news(null, usertype2, null, null);
+                    mylike.AddRange(MyRequest.analysis_news(res));
+                }
+            }
+            string userkeyword=re.getkeyword();
+            //关键字不为空才推荐
+            if (userkeyword != null)
+            {
+                string res = MyRequest.createurl_news(null, null,userkeyword, null);
                 mylike.AddRange(MyRequest.analysis_news(res));
             }
             return mylike;

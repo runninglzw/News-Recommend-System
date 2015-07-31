@@ -25,8 +25,8 @@ namespace News_Recommend.View
             {
                 star = 1;
             }
-            //如果本页没有数据则显示上一页
-            if (Getall(keyword, star).Count <1)
+            //如果本页没有数据并且star至少在第二页，显示上一页数据
+            if (Getall(keyword, star).Count <1 && star>1)
             {
                 --star;
             }

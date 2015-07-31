@@ -23,6 +23,10 @@ namespace News_Recommend.Control
         {
             return secondtype;
         }
+        public string getkeyword()
+        {
+            return keyword;
+        }
         /// <summary>
         /// 从logdata中获得出现最多次数的类型
         /// </summary>
@@ -51,16 +55,20 @@ namespace News_Recommend.Control
                     types.Add(type, count);
                 }
             }
-            firsttype = types.Keys.First();//指定出现最多次数的类型为第一个
-            int max=types.Values.First();//指定第一个类型的次数为max
-            foreach (var dic in types)
-            {
-                if (dic.Value > max)
-                {
-                    firsttype = dic.Key;
-                    max = dic.Value;
-                }
-            }
+            //使用linq语句查询，相当于下面注释的一段代码：找到value最大的一项
+            var maxtype = (from type in types orderby (type.Value) select new { type.Key, type.Value }).Last();
+            if (maxtype.Value > 0)
+                firsttype = maxtype.Key;
+            //firsttype = types.Keys.First();//指定出现最多次数的类型为第一个
+            //int max=types.Values.First();//指定第一个类型的次数为max
+            //foreach (var dic in types)
+            //{
+            //    if (dic.Value > max)
+            //    {
+            //        firsttype = dic.Key;
+            //        max = dic.Value;
+            //    }
+            //}
 
         }
         /// <summary>
@@ -82,7 +90,33 @@ namespace News_Recommend.Control
         /// <param name="id"></param>用户id
         public void GetKeyword(string id)
         {
-            string sql = "select keyword from userkeyword where userid=@id";
+            Dictionary<string, int> keywords = new Dictionary<string, int>();
+            string sql = "select keyword from userkeyword where userid=@userid";
+            DataSet ds = new DataSet();
+            SqlParameter[] param =
+            {
+                new SqlParameter("@userid",id)
+            };
+            ds = sqlHelper.ExecuteDataSet(sqlHelper.connectionstring, CommandType.Text, sql, param);
+            DataTable table=ds.Tables[0];//获取得到的数据，因为ds中只有一个表，所以它的第0个表就是keyword集合
+            foreach (DataRow row in table.Rows)
+            {
+                //如果存在该关键字，则将其value++
+                if (keywords.ContainsKey(row[0].ToString().Trim()))
+                {
+                    keywords[row[0].ToString().Trim()] += 1;
+                }
+                //否则将关键字加入集合中，其value设置为1
+                else
+                {
+                    keywords.Add(row[0].ToString().Trim(),1);
+                }
+            }
+            var min = (from d in keywords orderby d.Value select d.Key).Last();
+            //将key映射为key，value的形式，然后根据value进行升序，最后一个为value最大的key
+            var large=keywords.Keys.Select(key => new { key, value = keywords[key] }).OrderBy(key => key.value).Last();
+            if(large.value>0)
+                keyword = large.key.ToString().Trim();
         }
 
     }
