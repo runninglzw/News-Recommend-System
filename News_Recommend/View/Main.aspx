@@ -117,14 +117,14 @@
             <aside id="asideR">
                 <h5>最新推荐</h5>
                 <div class="divline"></div>
-                <ul>
+                <ul onclick=getType();>
                 <%int i = count - 10; %>
                     <%for (; i < count;i++ ){%>
                     <li>
-                    <a herf="" class="titleR"><%=commendnews[i].Gettitle()%></a>
+                    <a href="<%=commendnews[i].Geturl() %>" class="title"><%=commendnews[i].Gettitle()%></a>
                     <p>
                      <div class="date"><%=commendnews[i].Getpdate()%></div>
-            <a class="source" ="<%=commendnews[i].Geturl()%>"><%=commendnews[i].Getsource()%></a>
+            <a class="source" href="<%=commendnews[i].Geturl()%>"><%=commendnews[i].Getsource()%></a>
                     </p>
                     </li>                   
                     <% } %>
