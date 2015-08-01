@@ -90,11 +90,12 @@
             </ul>
         </nav>
     </header>
+    <form id="form1" runat="server">  
     <div id="content">
         <div id="content-1">
             <section id="sectionL">
                 <header>最新报道</header>
-                 <form id="form1" runat="server">  
+                 
                 <ul id="new"  onclick=getType();>
                 <%int x = 1 ; %>
                     <%foreach (var item in mynews) {%>
@@ -109,15 +110,13 @@
              <div class="fanye"><a id="nextpage"  href="Main.aspx?star=<%=(star+1) %>&count=<%=count %>">下一页</a>
    <a id="beforpage"  href="Main.aspx?star=<%=(star-1) %>&count=<%=count %>">上一页</a>
     </div>
-            <div style="display:none"><asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">  
-    </asp:ScriptManager>  </div>
+
     </ul> 
-    </form>
             </section>
             <aside id="asideR">
                 <h5>最新推荐</h5>
                 <div class="divline"></div>
-                <ul onclick=getType();>
+                <ul id="new" onclick=getType();>
                 <%int i = count - 10; %>
                     <%for (; i < count;i++ ){%>
                     <li>
@@ -125,6 +124,7 @@
                     <p>
                      <div class="date"><%=commendnews[i].Getpdate()%></div>
             <a class="source" href="<%=commendnews[i].Geturl()%>"><%=commendnews[i].Getsource()%></a>
+            <span style="display: none;"><%=commendnews[i].Getchannelname() %></span>
                     </p>
                     </li>                   
                     <% } %>
@@ -138,6 +138,9 @@
         </div>
         <div class="clearfix"></div>
     </div> 
+                <div style="display:none"><asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">  
+    </asp:ScriptManager>  </div>
+        </form>
     
     <footer class="footer">
         <h4>Copyright © qin</h4>
