@@ -136,11 +136,11 @@ namespace News_Recommend.View
                     mylike.AddRange(MyRequest.analysis_news(res));
                 }
             }
-            string userkeyword=re.getkeyword();
+            string userkeyword = re.getkeyword();
             //关键字不为空才推荐
             if (userkeyword != null)
             {
-                string res = MyRequest.createurl_news(null, null,userkeyword, null);
+                string res = MyRequest.createurl_news(null, null, userkeyword, null);
                 mylike.AddRange(MyRequest.analysis_news(res));
             }
             return mylike;
