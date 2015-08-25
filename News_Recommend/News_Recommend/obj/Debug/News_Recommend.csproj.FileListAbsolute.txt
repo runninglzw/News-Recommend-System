@@ -1,0 +1,5 @@
+F:\Github\News_Recommend\News_Recommend\News_Recommend\bin\News_Recommend.dll
+F:\Github\News_Recommend\News_Recommend\News_Recommend\bin\News_Recommend.pdb
+F:\Github\News_Recommend\News_Recommend\News_Recommend\obj\Debug\News_Recommend.csprojResolveAssemblyReference.cache
+F:\Github\News_Recommend\News_Recommend\News_Recommend\obj\Debug\News_Recommend.dll
+F:\Github\News_Recommend\News_Recommend\News_Recommend\obj\Debug\News_Recommend.pdb
